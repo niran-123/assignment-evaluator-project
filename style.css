@@ -1,0 +1,236 @@
+/* Import modern font */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+/* Reset */
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+/* Parallax background */
+
+body {
+
+    height: 100vh;
+
+    background-image: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* Dark overlay */
+
+body::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    z-index: -1;
+
+}
+
+
+/* Main glass container */
+
+.container {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    backdrop-filter: blur(15px);
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+
+    width: 450px;
+
+    text-align: center;
+
+    animation: float 4s ease-in-out infinite;
+
+}
+
+
+/* Floating animation */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+}
+
+
+/* Title */
+
+h1 {
+
+    margin-bottom: 20px;
+
+    font-weight: 600;
+
+    color: #fff;
+
+}
+
+
+/* Input */
+
+input {
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin: 10px 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    outline: none;
+
+}
+
+
+/* Button */
+
+button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+/* Button hover */
+
+button:hover {
+
+    transform: scale(1.05);
+
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+
+}
+
+
+/* Progress bar */
+
+.progress {
+
+    width: 100%;
+
+    background: #333;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    display: none;
+
+}
+
+
+.progress-bar {
+
+    height: 15px;
+
+    width: 0%;
+
+    background: linear-gradient(90deg, #00ffcc, #00c6ff);
+
+    animation: load 3s linear infinite;
+
+}
+
+
+@keyframes load {
+
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+
+}
+
+
+/* Download message */
+
+#status {
+
+    margin-top: 15px;
+
+    color: #00ffcc;
+
+    font-size: 14px;
+
+}
+
+
+/* Responsive */
+
+@media(max-width:500px) {
+
+    .container {
+
+        width: 90%;
+
+    }
+
+}

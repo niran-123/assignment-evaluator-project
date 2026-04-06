@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Assignment Evaluator</title>
+
+<style>
+
+/* Background */
+
+body{
+
+margin:0;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-family:Segoe UI;
+
+background:linear-gradient(135deg,#667eea,#764ba2);
+
+}
+
+
+/* Card */
+
+.container{
+
+background:rgba(255,255,255,0.1);
+
+backdrop-filter:blur(15px);
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 8px 32px rgba(0,0,0,0.3);
+
+text-align:center;
+
+width:400px;
+
+color:white;
+
+}
+
+
+/* Title */
+
+h2{
+
+margin-bottom:20px;
+
+}
+
+
+/* Input */
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0;
+
+border:none;
+
+border-radius:8px;
+
+outline:none;
+
+font-size:15px;
+
+}
+
+
+/* Button */
+
+button{
+
+width:100%;
+
+padding:12px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:8px;
+
+background:#00c6ff;
+
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
+button:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 15px #00c6ff;
+
+}
+
+
+/* Loader */
+
+.loader{
+
+display:none;
+
+margin-top:15px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+<h2>📄 Batch Assignment Evaluator</h2>
+
+
+<input id="link" placeholder="Paste Google Drive Folder Link">
+
+
+<input type="file" id="criteria">
+
+
+<button onclick="start()">Evaluate</button>
+
+
+<div class="loader" id="loader">
+
+⏳ Evaluating... Please wait
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+async function start(){
+
+const loader=document.getElementById("loader");
+
+loader.style.display="block";
+
+
+const link=document.getElementById("link").value;
+
+const file=document.getElementById("criteria").files[0];
+
+const formData=new FormData();
+
+formData.append("link",link);
+
+formData.append("criteria",file);
+
+
+const res=await fetch("/evaluate-batch",{
+
+method:"POST",
+
+body:formData
+
+});
+
+
+const blob=await res.blob();
+
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="results.xlsx";
+
+a.click();
+
+
+loader.style.display="none";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

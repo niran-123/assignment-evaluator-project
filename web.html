@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Batch Evaluator</h1>
+
+<input id="link" placeholder="Paste Drive Folder Link">
+
+<input type="file" id="criteria">
+
+<button onclick="start()">Evaluate</button>
+
+</div>
+
+<script>
+
+async function start(){
+
+const link=document.getElementById("link").value;
+
+const criteria=document.getElementById("criteria").files[0];
+
+const formData=new FormData();
+
+formData.append("link",link);
+
+formData.append("criteria",criteria);
+
+const res=await fetch("/evaluate-batch",{
+
+method:"POST",
+
+body:formData
+
+});
+
+const blob=await res.blob();
+
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="results.xlsx";
+
+a.click();
+
+}
+
+</script>
+
+</body>
+
+</html>
